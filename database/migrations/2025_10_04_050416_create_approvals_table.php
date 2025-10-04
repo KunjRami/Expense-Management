@@ -11,16 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('approvals', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('expense_id')->constrained()->onDelete('cascade');
-            $table->foreignId('approver_id')->constrained('users')->onDelete('cascade');
-            $table->integer('sequence')->default(1);
-            $table->boolean('is_manager_approver')->default(false);
-            $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
-            $table->text('comments')->nullable();
-            $table->timestamps();
-        });
+        // No-op migration stub: approvals table is created by a later migration (2025_10_04_050518_create_approvals_table.php)
+        // This file intentionally left blank to avoid duplicate creation and FK ordering issues during development.
     }
 
     /**

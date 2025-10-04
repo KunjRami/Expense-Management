@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // Use firstOrCreate so seeding is idempotent and won't fail on unique constraints.
         User::firstOrCreate(
             ['email' => 'test@example.com'],
-            ['name' => 'Test User']
+            ['name' => 'Test User', 'password' => bcrypt('password')]
         );
     }
 }

@@ -11,18 +11,25 @@ class ApprovalController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
-        $approvals = Approval::where('approver_id', $user->id)
-            ->where('status', 'Pending')
-            ->with(['expense.user'])
-            ->paginate(10);
+        // Admins should see all pending approvals (site-wide). Managers see approvals assigned to them.
+        if ($user->isAdmin()) {
+            $approvals = Approval::where('status', 'Pending')
+                ->with(['expense.user'])
+                ->paginate(10);
+        } else {
+            $approvals = Approval::where('approver_id', $user->id)
+                ->where('status', 'Pending')
+                ->with(['expense.user'])
+                ->paginate(10);
+        }
         
         return view('manager.approvals.index', compact('approvals'));
     }
 
     public function approve(Request $request, Approval $approval)
     {
-        if ($approval->approver_id !== auth()->id()) {
+        // Allow the assigned approver or an Admin to approve
+        if ($approval->approver_id !== auth()->id() && ! auth()->user()->isAdmin()) {
             abort(403);
         }
 
@@ -48,7 +55,8 @@ class ApprovalController extends Controller
 
     public function reject(Request $request, Approval $approval)
     {
-        if ($approval->approver_id !== auth()->id()) {
+        // Allow the assigned approver or an Admin to reject
+        if ($approval->approver_id !== auth()->id() && ! auth()->user()->isAdmin()) {
             abort(403);
         }
 

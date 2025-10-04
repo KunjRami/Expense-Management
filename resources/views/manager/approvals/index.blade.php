@@ -32,7 +32,12 @@
                                 </div>
                                 <div>
                                     <h3 class="text-sm font-medium text-gray-500">Amount</h3>
-                                    <p class="mt-1 text-lg font-bold">{{ auth()->user()->company->currency }} {{ number_format($approval->expense->converted_amount, 2) }}</p>
+                                    @php
+                                        $expenseCompanyCurrency = optional($approval->expense->user->company)->currency;
+                                        $viewerCompanyCurrency = optional(auth()->user()->company)->currency;
+                                        $currency = $expenseCompanyCurrency ?? $viewerCompanyCurrency ?? 'USD';
+                                    @endphp
+                                    <p class="mt-1 text-lg font-bold">{{ $currency }} {{ number_format($approval->expense->converted_amount ?? $approval->expense->amount, 2) }}</p>
                                 </div>
                             </div>
 

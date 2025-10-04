@@ -19,8 +19,8 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+<body class="bg-[#f7f9fb] text-[#1b2733] flex p-6 lg:p-12 items-center lg:justify-center min-h-screen flex-col font-sans">
+<header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
@@ -49,15 +49,88 @@
                 </nav>
             @endif
         </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
-                <div class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <h1 class="mb-1 font-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">Laravel has an incredibly rich ecosystem. <br>We suggest starting with the following.</p>
-                    <ul class="flex flex-col mb-4 lg:mb-6">
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
+<div class="w-full">
+    <header class="mx-auto max-w-6xl">
+        {{-- hero with gradient --}}
+        <section class="rounded-lg bg-white p-12 shadow-sm">
+            <div class="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-8">
+                <div class="flex-1">
+                    <h1 class="text-4xl lg:text-5xl font-semibold leading-tight text-[#0f1720]">Expense management for professionals</h1>
+                    <p class="mt-4 text-gray-600">Streamline receipt capture, approvals, and reporting. Trusted by small teams and enterprises alike.</p>
+
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="inline-flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow">Log in</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="inline-flex items-center gap-2 px-5 py-3 border border-blue-100 text-blue-700 rounded-md">Register</a>
+                            @endif
+                        @endauth
+                        <a href="https://github.com/KunjRami/Expense-Management" target="_blank" class="inline-flex items-center gap-2 px-4 py-3 border border-gray-200 text-gray-700 rounded-md">View Source</a>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-96 bg-gray-50 rounded-lg p-6">
+                    <div class="text-sm font-medium text-gray-800">Get started in minutes</div>
+                    <ul class="mt-3 text-sm text-gray-600 list-disc list-inside space-y-2">
+                        <li>Sign up and invite teammates</li>
+                        <li>Configure approval flows</li>
+                        <li>Start submitting expenses</li>
+                    </ul>
+                    <div class="mt-4">
+                        <a class="text-sm px-3 py-2 bg-white border rounded-md text-blue-600" href="{{ route('register') }}">Create account</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main class="max-w-6xl mx-auto mt-8 px-4 lg:px-0">
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="p-6 rounded-lg border bg-white dark:bg-[#0b0b0b] shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-md bg-[#fff3f3] dark:bg-[#2b0b0b] text-[#f43]">💳</div>
+                    <div>
+                        <h4 class="font-semibold">Smart Capture</h4>
+                        <p class="text-xs text-[#666] dark:text-[#a9a9a9]">Snap receipts and extract data with OCR.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg border bg-white dark:bg-[#0b0b0b] shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-md bg-[#fff9e6] dark:bg-[#3b2b10] text-[#f59e0b]">✅</div>
+                    <div>
+                        <h4 class="font-semibold">Workflow Approvals</h4>
+                        <p class="text-xs text-[#666] dark:text-[#a9a9a9]">Configure multi-level approvals for compliance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg border bg-white dark:bg-[#0b0b0b] shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-md bg-[#eefbf7] dark:bg-[#06251a] text-[#059669]">📊</div>
+                    <div>
+                        <h4 class="font-semibold">Reports & Exports</h4>
+                        <p class="text-xs text-[#666] dark:text-[#a9a9a9]">Download CSVs or PDFs for accounting and audits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white dark:bg-[#0b0b0b] p-6 rounded-lg shadow-sm mb-8">
+            <div class="flex flex-col lg:flex-row items-center gap-6">
+                <blockquote class="flex-1 text-lg italic">“This tool saved our finance team hours every month — approvals are faster and reporting is painless.”</blockquote>
+                <div class="text-sm">— Alex, Finance Manager</div>
+            </div>
+        </section>
+
+        <footer class="text-sm text-[#666] dark:text-[#999] py-6 text-center">
+            © {{ date('Y') }} Expense Management — Built with Laravel. <a href="/" class="underline">Home</a> • <a href="https://laravel.com/docs" class="underline">Docs</a>
+        </footer>
+    </main>
+</div>
                                     <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
                                 </span>
                             </span>
