@@ -15,6 +15,25 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    @if(auth()->user()->isAdmin())
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.company.index')" :active="request()->routeIs('admin.company.*')">
+                            {{ __('Company') }}
+                        </x-nav-link>
+                    @endif
+                    
+                    @if(auth()->user()->isManager() || auth()->user()->isAdmin())
+                        <x-nav-link :href="route('manager.approvals.index')" :active="request()->routeIs('manager.approvals.*')">
+                            {{ __('Approvals') }}
+                        </x-nav-link>
+                    @endif
+                    
+                    <x-nav-link :href="route('employee.expenses.index')" :active="request()->routeIs('employee.expenses.*')">
+                        {{ __('Expenses') }}
+                    </x-nav-link>
                 </div>
             </div>
 
