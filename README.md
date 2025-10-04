@@ -195,28 +195,4 @@ After seeding demo data, you can use these credentials:
 - **Database**: SQLite/MySQL/PostgreSQL
 - **File Storage**: Laravel File Storage
 
-## Roadmap
-
-Future enhancements planned:
-- Currency conversion API integration (real-time exchange rates)
-- OCR receipt processing for automatic data extraction
-- Advanced multi-level approval workflows
-- Email notifications for expense status changes
-- Reports and analytics with charts
-- PDF/Excel export functionality
-- Bulk expense operations
-- Mobile-responsive improvements
-- API for mobile app integration
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Support
-
-For issues and questions, please open an issue on the GitHub repository.
 
