@@ -1,61 +1,222 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Expense Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive Laravel-based Expense Management System with multi-level approval workflows, role-based access control, and expense tracking.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### User Roles
+- **Admin**: Full system access, user management, company settings, approval rules configuration
+- **Manager**: Approve/reject expenses, view team expenses, manage direct reports
+- **Employee**: Submit expenses, upload receipts, track expense status
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Core Functionality
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### For Employees
+- Submit expense claims with details (amount, category, date, description)
+- Upload receipt attachments (JPG, PNG, PDF)
+- Track expense status (Pending, Approved, Rejected)
+- View approval history with manager comments
+- Personal dashboard with expense statistics
 
-## Learning Laravel
+#### For Managers
+- Review pending expense approvals
+- Approve or reject expenses with comments
+- View team expense history
+- Dashboard with approval statistics
+- Access to approval history
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### For Admins
+- Company-wide expense dashboard with statistics
+- User management (Create, Edit, Delete users)
+- Assign roles and managers to users
+- Configure company settings (name, default currency)
+- Setup approval rules (percentage-based, specific approver, or hybrid)
+- View all company expenses
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Additional Features
+- Multi-currency support with company default currency
+- Expense categorization (Travel, Food, Accommodation, Office Supplies, Equipment, Other)
+- Role-based navigation and access control
+- Responsive design with Tailwind CSS
+- Approval workflow with comments system
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+### Prerequisites
+- PHP 8.1 or higher
+- Composer
+- Node.js & NPM
+- SQLite/MySQL/PostgreSQL database
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Setup Instructions
 
-### Premium Partners
+1. **Clone the repository**
+```bash
+git clone https://github.com/KunjRami/Expense-Management.git
+cd Expense-Management
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Install PHP dependencies**
+```bash
+composer install
+```
+
+3. **Install Node dependencies**
+```bash
+npm install
+```
+
+4. **Environment setup**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+5. **Configure database**
+Edit `.env` file and set your database credentials. For SQLite (default):
+```
+DB_CONNECTION=sqlite
+```
+
+For MySQL:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=expense_management
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+6. **Run migrations**
+```bash
+php artisan migrate
+```
+
+7. **Create storage symlink**
+```bash
+php artisan storage:link
+```
+
+8. **Seed demo data (optional)**
+```bash
+php artisan db:seed --class=DemoDataSeeder
+```
+
+9. **Build assets**
+```bash
+npm run build
+```
+
+10. **Start development server**
+```bash
+php artisan serve
+```
+
+Visit http://localhost:8000 in your browser.
+
+## Demo Credentials
+
+After seeding demo data, you can use these credentials:
+
+- **Admin**: admin@demo.com / password
+- **Manager 1**: manager1@demo.com / password
+- **Manager 2**: manager2@demo.com / password
+- **Employee 1**: employee1@demo.com / password
+- **Employee 2**: employee2@demo.com / password
+- **Employee 3**: employee3@demo.com / password
+
+## Usage Guide
+
+### First Time Setup
+
+1. **Register as Admin**: Visit `/register` and create your account with company name
+2. **Add Users**: Navigate to "Users" in the admin panel to add managers and employees
+3. **Assign Managers**: When creating employees, assign them to their respective managers
+4. **Configure Approval Rules** (Optional): Set up percentage-based or specific approver rules
+
+### Submitting an Expense (Employee)
+
+1. Log in with employee credentials
+2. Click "Submit New Expense" or navigate to Expenses → Create
+3. Fill in expense details:
+   - Expense Date
+   - Category
+   - Amount and Currency
+   - Description
+   - Upload Receipt (optional)
+4. Submit the expense for approval
+
+### Approving Expenses (Manager)
+
+1. Log in with manager credentials
+2. View pending approvals on the dashboard or navigate to "Approvals"
+3. Review expense details and receipt
+4. Click "Approve" or "Reject" with optional comments
+5. View approval history in the "Approval History" section
+
+### Managing Users (Admin)
+
+1. Log in with admin credentials
+2. Navigate to "Users"
+3. Click "Add New User" to create users
+4. Edit users to change roles or assign managers
+5. Delete users as needed (cannot delete yourself)
+
+### Company Settings (Admin)
+
+1. Navigate to "Company" in the admin panel
+2. Update company name
+3. Set default currency (3-letter code, e.g., USD, EUR, GBP)
+
+## Database Schema
+
+### Companies
+- id, name, currency, timestamps
+
+### Users
+- id, name, email, password, role, manager_id, company_id, timestamps
+
+### Expenses
+- id, user_id, amount, currency, converted_amount, category, description, expense_date, status, receipt_path, timestamps
+
+### Approvals
+- id, expense_id, approver_id, sequence, is_manager_approver, status, comments, timestamps
+
+### Approval Rules
+- id, company_id, rule_type, percentage, specific_user_id, timestamps
+
+## Technology Stack
+
+- **Framework**: Laravel 12
+- **Authentication**: Laravel Breeze
+- **Permissions**: Spatie Laravel Permission
+- **Frontend**: Blade Templates, Tailwind CSS, Alpine.js
+- **Database**: SQLite/MySQL/PostgreSQL
+- **File Storage**: Laravel File Storage
+
+## Roadmap
+
+Future enhancements planned:
+- Currency conversion API integration (real-time exchange rates)
+- OCR receipt processing for automatic data extraction
+- Advanced multi-level approval workflows
+- Email notifications for expense status changes
+- Reports and analytics with charts
+- PDF/Excel export functionality
+- Bulk expense operations
+- Mobile-responsive improvements
+- API for mobile app integration
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Support
+
+For issues and questions, please open an issue on the GitHub repository.
+
